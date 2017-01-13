@@ -1,0 +1,10 @@
+[
+	{
+		"caption": "mattmc3: Convert CSV to INSERT SQL",
+		"command": "mattmc3_convert_csv_to_insert_sql",
+	},
+	{
+		"caption": "mattmc3: MSSQL Reformat",
+		"command": "mattmc3_reformat_mssql",
+	},
+]
