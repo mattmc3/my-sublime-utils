@@ -10,7 +10,7 @@ My personal, hacky Sublime Text 3 plugins.
 - Get [PackageControl][1]
 - Add the repo (⌘+shift+p pcar): [https://github.com/mattmc3/my-sublime-utils][2]
 - Initiate a Package Install (⌘+shift+p pci)
-- Install mattmc3 tools
+- Install my-sublime-tools
 - Experience joy
 
 [1]: https://packagecontrol.io
