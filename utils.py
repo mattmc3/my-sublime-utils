@@ -34,13 +34,15 @@ class SqlUtil():
         ins_column_names = ""
         if not chunk_size or chunk_size < 1:
             chunk_size = 1
+        row_num = -1
         for idx, row in enumerate(datalist):
             # don't treat the header like its data
             if has_header and idx == 0:
                 ins_column_names = " (" + ", ".join(['"{}"'.format(c) for c in row]) + ")"
                 continue
 
-            new_insert = (idx % chunk_size == 0)
+            row_num += 1
+            new_insert = (row_num % chunk_size == 0)
             if new_insert:
                 sql = "INSERT INTO {{some_table}}"
                 if has_header:
