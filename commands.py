@@ -7,7 +7,7 @@ from .utils import SqlUtil
 settings = {}
 def plugin_loaded():
     global settings
-    settings = sublime.load_settings('my-sublime-tools.sublime-settings')
+    settings = sublime.load_settings('my-sublime-utils.sublime-settings')
 
 
 class Mattmc3ConvertCsvToInsertSqlCommand(sublime_plugin.TextCommand):

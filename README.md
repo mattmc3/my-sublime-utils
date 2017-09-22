@@ -1,4 +1,4 @@
-# my-sublime-tools
+# my-sublime-utils
 My personal, hacky Sublime Text 3 plugins.
 
 ## plugin list
@@ -10,7 +10,7 @@ My personal, hacky Sublime Text 3 plugins.
 - Get [PackageControl][1]
 - Add the repo (⌘+shift+p pcar): [https://github.com/mattmc3/my-sublime-utils][2]
 - Initiate a Package Install (⌘+shift+p pci)
-- Install my-sublime-tools
+- Install my-sublime-utils
 - Experience joy
 
 [1]: https://packagecontrol.io

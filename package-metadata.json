@@ -3,6 +3,6 @@
    "description": "My personal, hacky Sublime Text 3 Plugins",
    "version": "0.0.8",
    "platforms": ["*"],
-   "url": "https://github.com/mattmc3/my-sublime-tools",
+   "url": "https://github.com/mattmc3/my-sublime-utils",
    "sublime_text": ">=3000"
 }
