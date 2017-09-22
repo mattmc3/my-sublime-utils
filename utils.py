@@ -1,10 +1,9 @@
 '''
 SQL Tools: mattmc3
-Version: 0.0.4
-Revision: 20170113
+Version: 0.0.5
+Revision: 20170922
 
 TODO:
-    - Settings?
     - Trim values
     - single insert vs multiple
     - values vs union all select
@@ -18,7 +17,7 @@ import re
 
 
 class SqlUtil():
-    def csv_to_inserts(self, csvdata):
+    def csv_to_inserts(self, csvdata, chunk_size=1):
         # remove 0x00 NULs because csv.reader chokes on it
         csvdata = csvdata.replace('\0', '?')
         data = []
@@ -28,13 +27,15 @@ class SqlUtil():
         csv_io = StringIO(csvdata)
         data = list(csv.reader(csv_io, dialect=dialect))
 
-        return self._get_dialect_str(dialect, has_header) + "\n" + self.list_to_inserts(data, has_header) + "\n"
+        return self._get_dialect_str(dialect, has_header) + "\n" + self.list_to_inserts(data, has_header, chunk_size) + "\n"
 
-    def list_to_inserts(self, datalist, has_header):
+    def list_to_inserts(self, datalist, has_header, chunk_size=1):
         result = []
         first_insert = True
+        if not chunk_size or chunk_size < 1:
+            chunk_size = 1
         for idx, row in enumerate(datalist):
-            if idx == 0:
+            if idx % chunk_size == 0:
                 sql = "INSERT INTO {{some_table}}"
                 if has_header:
                     sql += " (" + ", ".join(['"{}"'.format(c) for c in row]) + ")"
@@ -56,7 +57,7 @@ class SqlUtil():
     def _get_dialect_str(self, dialect, has_header):
         result = []
         result.append("-- =====================")
-        result.append("-- Delimeted Dialect Details:")
+        result.append("-- Delimited Dialect Details:")
         result.append("-- delimiter: {0}".format(self._show(dialect.delimiter)))
         result.append("-- double quote: {0}".format(self._show(dialect.doublequote)))
         result.append("-- escape char: {0}".format(self._show(dialect.escapechar)))

@@ -4,9 +4,17 @@ import re
 from .utils import SqlUtil
 
 
+settings = {}
+def plugin_loaded():
+    global settings
+    settings = sublime.load_settings('my-sublime-tools.sublime-settings')
+
+
 class Mattmc3ConvertCsvToInsertSqlCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         util = SqlUtil()
+
+        values_chunk_size = settings.get("values_chunk_size")
 
         for region in self.view.sel():
             selection = region
@@ -17,7 +25,7 @@ class Mattmc3ConvertCsvToInsertSqlCommand(sublime_plugin.TextCommand):
             csvdata = self.view.substr(selection)
 
             try:
-                insertsql = util.csv_to_inserts(csvdata)
+                insertsql = util.csv_to_inserts(csvdata, chunk_size=values_chunk_size)
             except Exception as ex:
                 sublime.error_message(__name__ + ": csv_to_inserts failed : " + str(ex))
                 return
