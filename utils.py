@@ -1,7 +1,7 @@
 '''
 SQL Tools: mattmc3
-Version: 0.0.6
-Revision: 20170922.3
+Version: 0.0.8
+Revision: 20170922.4
 
 TODO:
     - Trim values
