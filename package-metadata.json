@@ -1,7 +1,7 @@
 {
    "dependencies":[],
    "description": "My personal, hacky Sublime Text 3 Plugins",
-   "version": "0.0.5",
+   "version": "0.0.6",
    "platforms": ["*"],
    "url": "https://github.com/mattmc3/my-sublime-tools",
    "sublime_text": ">=3000"

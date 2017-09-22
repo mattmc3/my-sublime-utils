@@ -1,7 +1,7 @@
 '''
 SQL Tools: mattmc3
-Version: 0.0.5
-Revision: 20170922
+Version: 0.0.6
+Revision: 20170922.2
 
 TODO:
     - Trim values
@@ -32,15 +32,18 @@ class SqlUtil():
     def list_to_inserts(self, datalist, has_header, chunk_size=1):
         result = []
         first_insert = True
+        ins_column_names = ""
         if not chunk_size or chunk_size < 1:
             chunk_size = 1
         for idx, row in enumerate(datalist):
             if idx % chunk_size == 0:
                 sql = "INSERT INTO {{some_table}}"
+                if has_header and idx == 0:
+                    ins_column_names = " (" + ", ".join(['"{}"'.format(c) for c in row]) + ")"
                 if has_header:
-                    sql += " (" + ", ".join(['"{}"'.format(c) for c in row]) + ")"
+                    sql += ins_column_names
                 result.append(sql)
-                if has_header:
+                if has_header and idx == 0:
                     continue
 
             # determine whether we have the first data row
