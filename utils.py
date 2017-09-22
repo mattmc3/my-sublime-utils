@@ -31,26 +31,24 @@ class SqlUtil():
 
     def list_to_inserts(self, datalist, has_header, chunk_size=1):
         result = []
-        first_insert = True
         ins_column_names = ""
         if not chunk_size or chunk_size < 1:
             chunk_size = 1
         for idx, row in enumerate(datalist):
+            # don't treat the header like its data
             if has_header and idx == 0:
                 ins_column_names = " (" + ", ".join(['"{}"'.format(c) for c in row]) + ")"
                 continue
 
-            if idx % chunk_size == 0:
+            new_insert = (idx % chunk_size == 0)
+            if new_insert:
                 sql = "INSERT INTO {{some_table}}"
                 if has_header:
                     sql += ins_column_names
                 result.append(sql)
 
             # determine whether we have the first data row
-            line_prefix = "      ,"
-            if first_insert:
-                line_prefix = "VALUES "
-                first_insert = False
+            line_prefix = "VALUES " if new_insert else "      ,"
 
             values = line_prefix + "(" + ", ".join([self._sql_escape(c) for c in row]) + ")"
             result.append(values)
